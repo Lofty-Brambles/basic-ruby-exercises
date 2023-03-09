@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-c = true
-c = [9, 98, 98]
+p = [1, 2, 3, 4, 5]
 
-p c.join "k "
+p.length.times { |i| p i }
