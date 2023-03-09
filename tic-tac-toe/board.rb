@@ -11,15 +11,12 @@ class Board
   end
 
   def play_move(row, col)
-    p @turn_for_player1
-    p @turn_for_player_1 ? 1 : 0
-    p self
-    @array[row][col] = @symbols[@turn_for_player_1 ? 1 : 0]
+    @array[row][col] = @symbols[@turn_for_player1 ? 0 : 1]
 
-    results = fetch_results(row, col)
-    return results if results[:status] == 'yields'
+    results = fetch_results(row, col, @symbols[@turn_for_player1 ? 0 : 1])
+    @turn_for_player1 = !@turn_for_player1 unless results[:status] == 'yields'
 
-    @turn_for_player1 = !@turn_for_player1
+    results
   end
 
   def display_proof_board
@@ -42,22 +39,23 @@ class Board
 
   private
 
-  def fetch_results(row_pos, col_pos)
+  def fetch_results(row_pos, col_pos, player)
     return { status: 'yields', result: 'draw' } if check_for_draw
 
-    win = check_for_row_sum(row_pos, col_pos).any? { |num| num == 3 }
-    return { status: 'yields', result: @turn_for_player_1 } if win
+    win = check_for_row_sum(row_pos, col_pos, player).any? { |num| num == 3 }
+    return { status: 'yields', result: @turn_for_player1 } if win
 
     { status: 'continue' }
   end
 
-  def check_for_row_sum(row_pos, col_pos)
+  def check_for_row_sum(row_pos, col_pos, player)
     col = row = pdiag = ndiag = 0
+
     3.times do |i|
-      col += 1 if @array[i][col_pos]
-      row += 1 if @array[row_pos][i]
-      pdiag += 1 if @array[i][i]
-      ndiag += 1 if @array[2 - i][i]
+      col += 1 if @array[i][col_pos] == player
+      row += 1 if @array[row_pos][i] == player
+      pdiag += 1 if @array[i][i] == player
+      ndiag += 1 if @array[2 - i][i] == player
     end
 
     [col, row, pdiag, ndiag]

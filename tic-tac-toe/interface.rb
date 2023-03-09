@@ -9,8 +9,8 @@ module Interface
   BOLD = "\x1b[37;01m"
 
   def render_text(text = nil)
-    # print "\x1b[2J\x1b[H"
-    # starting_msg
+    print "\x1b[2J\x1b[H"
+    starting_msg
     print text unless text.nil?
   end
 
@@ -33,6 +33,10 @@ module Interface
 
   def show_error(error_msg)
     puts "#{RED}[ E ]#{RESET} #{error_msg}"
+  end
+
+  def show_result(message)
+    puts "\n#{GREEN}[ ¶ ]#{RESET} #{message}"
   end
 
   # rubocop:disable Metrics/AbcSize

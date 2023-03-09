@@ -48,10 +48,11 @@ class GameApi
 
   def game_loop
     results = { status: 'continue' }
+    show_board(@board, @player1, @player2)
     while results[:status] == 'continue'
-      show_board(@board, @player1, @player2)
       move = fetch_move.to_i - 1
-      @board.play_move(move / 3, move % 3)
+      results = @board.play_move(move / 3, move % 3)
+      show_board(@board, @player1, @player2)
     end
     display_results(results)
   end
@@ -68,13 +69,14 @@ class GameApi
   end
 
   def display_results(results)
-    if results[:result].is_a?(Boolean)
-      puts "Player #{results[:result] ? 1 : 2} has won, rejoice!"
+    if [true, false].include?(results[:result])
+      show_result("Player #{results[:result] ? 1 : 2} has won, rejoice!")
     else
-      puts 'It is a DRAW!'
+      show_result('It is a DRAW!')
     end
 
-    prompt('Would you like to play again?')
+    play_again = prompt('Would you like to play again? [y|n]')
+    play_again.match?(/(y|ye|yes)/i)
   end
 end
 
