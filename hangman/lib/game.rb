@@ -43,16 +43,14 @@ class Game
     text_file = 'google-10000-english-no-swears.txt'
     file = File.open(File.join(Dir.pwd, text_file), 'r')
     words = file.readlines
+    words[-1] = words[-1] + "\n"
     file.close
 
-    word = words.sample
-    filter = word.end_with?('\n') ? word : word[0..-3]
-    until filter.length >= 5 && filter.length <= 12
-      word = words.sample
-      filter = word.end_with?('\n') ? word : word[0..-3]
+    word = words.sample[0..-2]
+    until word.length >= 5 && word.length <= 12
+      word = words.sample[0..-2]
     end
-
-    filter
+    word
   end
 
   def show_status
