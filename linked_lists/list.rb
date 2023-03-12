@@ -104,6 +104,6 @@ class LinkedList
       string += "( #{node.value} ) -> "
       node = node.next_node
     end
-    string + "nil"
+    "#{string}nil"
   end
 end
