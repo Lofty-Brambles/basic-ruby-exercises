@@ -1,2 +1,5 @@
-a = Array.new(-5)
-p a
+def t
+  return a = 9
+end
+
+p t
