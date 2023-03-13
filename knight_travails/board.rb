@@ -12,7 +12,7 @@ class Board
   def find_level(finish)
     square = @start
     until square.position == finish
-      square.generate_moves.each { |move| @queue.push(move) }
+      square.generate_moves.each { |sq| @queue.push(sq) }
       square = @queue.shift
     end
 
@@ -25,7 +25,7 @@ class Board
   def init_process_vars
     @history = []
     Square.reinitialize
-    @queue = [Square.new(nil, @start)]
+    @queue = [Square.new(nil, @start.position)]
   end
 
   def generate_result_path(square)

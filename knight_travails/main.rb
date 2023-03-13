@@ -8,4 +8,4 @@ def knight_travails(start, finish)
 end
 
 puts 'knight_travails([3,3],[4,3]) =>'
-p knight_travails([3, 3], [4, 3])
+knight_travails([3, 3], [4, 3])
