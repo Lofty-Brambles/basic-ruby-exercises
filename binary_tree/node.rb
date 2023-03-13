@@ -11,8 +11,8 @@ class Node
     @right = right
   end
 
-  def <=>(another)
-    compared = another.instance_of(Node) ? another.data : another
+  def <=>(other)
+    compared = other.is_a?(Node) ? other.data : other
     data <=> compared
   end
 end
