@@ -45,6 +45,7 @@ module Interface
         1   2   3   4   5   6   7
 
         #{player1[:name]} [#{player1[:symbol]}] |VS| #{player2[:name]} [#{player2[:symbol]}]
+
     HEREDOC
   end
 
