@@ -48,13 +48,12 @@ module Interface
     HEREDOC
   end
 
-  def bold(text)
+  def bolden(text)
     "#{BOLD_N_UNDERLINE}#{text}#{RESET}"
   end
 
-  def prompt(question)
-    print "\n#{YELLOW}[ Q ]#{RESET} #{question}#{YELLOW} ⇒  #{RESET}"
-    gets.chomp
+  def prettify_question(question)
+    "\n#{YELLOW}[ Q ]#{RESET} #{question}#{YELLOW} ⇒  #{RESET}"
   end
 
   def show_result(message, pass)

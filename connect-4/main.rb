@@ -2,4 +2,4 @@
 
 require_relative 'lib/game.rb'
 
-Game.new
+Game.new.play_loop
