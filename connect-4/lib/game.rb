@@ -2,6 +2,7 @@
 
 require_relative 'interface'
 require_relative 'prompt'
+require_relative 'board'
 
 # the base class for a loop for the game
 class Game
@@ -20,7 +21,7 @@ class Game
   end
 
   def play_game
-    render_text(bold("To start the game, enter the following details:"))
+    render_text(bolden("To start the game, enter the following details:"))
     player1 = @input.ask("Player 1 | Enter name")
     player2 = @input.ask("Player 2 | Enter name")
     Board.new(@input, player1, player2).play

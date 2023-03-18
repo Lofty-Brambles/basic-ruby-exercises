@@ -6,7 +6,6 @@ require_relative '../lib/interface'
 
 describe Board do
   subject(:board) { Board.new(Prompt.new, 'Bill', 'Bob') }
-  let(:interface) { Class.new { extend Interface } }
 
   describe '#revert_turn' do
     it "can revert turns between players" do
@@ -20,10 +19,22 @@ describe Board do
     context 'when the board is at a certain position, say empty' do
       it 'you can add a move' do
         initial_board = Array.new(7) { Array.new(6) }
-        update_index = '3'
-        board.update_at(update_index)
+        update_at = '3'
+        update_index = update_at.to_i - 1
+        board.update_board(update_at)
 
-        expect(board.board[update_index.to_i][0]).to eq(interface.RED_CIRCLE)
+        expect(board.board[update_index][0]).to eq(Interface::RED_CIRCLE)
+      end
+    end
+  end
+
+  describe '#declare_winner' do
+    context 'when result is a draw or over' do
+      it 'calls show_results once' do
+        board.results = { status: 'draw' }
+        allow(board).to receive(:show_results).and_return(nil)
+        expect(board).to receive(:show_results).once
+        board.declare_winner
       end
     end
   end
